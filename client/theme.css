@@ -1,0 +1,65 @@
+/* ============ Dünya 10 tasarım dili v2 ============ */
+:root{--panel:rgba(13,24,34,.78);--panel-solid:#0F1C27;--line:rgba(140,180,210,.16);--line2:rgba(140,180,210,.28);--ink:#EAF1F6;--mute:#8EA4B4;--brass:#F0B544;--brass2:#FFD27A;--alert:#FF5C4D;--ok:#3FD483;--sky:#4FB3F2;--r:12px;--r2:8px;--sh:0 10px 30px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.05)}
+#top{background:linear-gradient(180deg,rgba(8,16,24,.92),rgba(8,16,24,.72));backdrop-filter:blur(10px);border-bottom:1px solid var(--line);box-shadow:0 6px 24px rgba(0,0,0,.25)}
+.brand span{letter-spacing:.01em}.brand b{background:linear-gradient(180deg,var(--brass2),var(--brass));-webkit-background-clip:text;background-clip:text;color:transparent}
+#nations,#dossier,#feed,#miniwrap,#inspect{background:var(--panel);backdrop-filter:blur(12px) saturate(1.2);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--sh)}
+#modal .box{background:var(--panel-solid);border:1px solid var(--line2);border-radius:16px;box-shadow:0 30px 80px rgba(0,0,0,.55)}
+.tbtn{display:inline-flex;align-items:center;gap:7px;background:rgba(255,255,255,.04);border:1px solid var(--line2);border-radius:var(--r2);padding:7px 12px;font:600 13px var(--head);letter-spacing:.02em;transition:background .15s,border-color .15s,transform .1s}
+.tbtn:hover{background:rgba(255,255,255,.09);border-color:rgba(200,225,245,.45)}.tbtn:active{transform:translateY(1px)}
+.tbtn.primary{background:linear-gradient(180deg,var(--brass2),var(--brass));color:#241703;border-color:transparent;box-shadow:0 4px 14px rgba(240,181,68,.3)}
+.tbtn.primary:hover{filter:brightness(1.06)}
+.tbtn svg{width:15px;height:15px;flex:none}
+.speeds{background:rgba(0,0,0,.25);border:1px solid var(--line2);border-radius:10px;padding:3px;gap:2px}
+.speeds button{border-radius:7px;min-width:34px;font:700 12px var(--head);transition:background .15s,color .15s}
+.speeds button:hover{color:var(--ink);background:rgba(255,255,255,.06)}
+.speeds button.on{background:linear-gradient(180deg,var(--brass2),var(--brass));color:#241703;box-shadow:0 2px 8px rgba(240,181,68,.35)}
+#clock{font-family:var(--head)}#clock small{font-family:var(--body);opacity:.85}
+#nations h2,#dossier h2,#feed h2,.sect h2{font:700 11px var(--head);letter-spacing:.12em;text-transform:uppercase;color:var(--mute)}
+.nat{border-radius:10px;padding:8px 9px;transition:background .15s,border-color .15s}
+.nat .sw{width:16px;height:12px;border-radius:2px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.25)}
+.nat .apbar{grid-column:2/4;height:3px;background:rgba(255,255,255,.08);border-radius:2px;overflow:hidden;margin-top:3px}
+.nat .apbar i{display:block;height:100%;border-radius:2px}
+.nat.sel{background:linear-gradient(90deg,rgba(240,181,68,.14),rgba(240,181,68,.02));border-color:rgba(240,181,68,.55)}
+.stat{background:rgba(255,255,255,.035);border:1px solid var(--line);border-radius:10px;padding:8px 10px;transition:border-color .15s}
+.stat:hover{border-color:var(--line2)}.stat .k{font-size:11px;letter-spacing:.03em}.stat .v{font-size:17px}
+.pres{background:linear-gradient(135deg,rgba(240,181,68,.10),rgba(255,255,255,.02));border-left:3px solid var(--brass);border-radius:0 10px 10px 0}
+.chip{background:rgba(255,255,255,.07);border:1px solid var(--line);font-weight:500}
+.chip.claude{background:rgba(240,181,68,.14);border-color:rgba(240,181,68,.4)}
+.bar .t,.rel .t{background:rgba(255,255,255,.07)}.bar .t i{border-radius:4px}
+#feedlist li{border-left:2px solid transparent;border-radius:6px;padding:4px 6px;transition:background .12s}
+#feedlist li.hi{border-left-color:var(--alert);background:rgba(255,92,77,.06)}#feedlist li.ai{border-left-color:var(--brass);background:rgba(240,181,68,.05)}
+.feedtabs button{border-radius:6px;font-weight:600}.feedtabs button.on{background:rgba(255,255,255,.08);border-color:var(--line2)}
+#toast div{backdrop-filter:blur(8px);border-radius:10px;padding:10px 16px;box-shadow:0 10px 30px rgba(0,0,0,.45)}
+::-webkit-scrollbar{width:8px;height:8px}::-webkit-scrollbar-thumb{background:rgba(160,190,215,.22);border-radius:8px}::-webkit-scrollbar-track{background:transparent}
+.menu{background:var(--panel-solid);border:1px solid var(--line2);border-radius:12px;box-shadow:0 18px 40px rgba(0,0,0,.5)}
+.menu button,.menu label{border-radius:8px;font-weight:500}
+#loading{background:radial-gradient(1200px 600px at 50% 40%,#13314A,#08121B)}
+
+/* Ulkeler ve Dosya butonlari yalnizca mobilde */
+.tbtn.hidebtn{display:none}
+@media (max-width:760px){.tbtn.hidebtn{display:inline-flex}}
+
+/* gazete okunurluğu */
+#modal .paper p{color:#2E2A22}#modal .paper .pspot{color:#5A4E3C}#modal .paper h2,#modal .paper h4{color:#1E1B16}
+
+/* gazete okunurluğu */
+#modal .paper p{color:#2E2A22}#modal .paper .pspot{color:#5A4E3C}#modal .paper h2,#modal .paper h4{color:#1E1B16}
+
+/* ===== kompakt düzen: dizüstü ve ölçeklenmiş ekranlar ===== */
+@media (max-width:1500px),(max-height:860px){
+  #top{padding:5px 10px;gap:8px;flex-wrap:nowrap}
+  .brand{font-size:16px}.brand b{font-size:19px}.brand small{display:none}
+  #clock{min-width:0;font-size:13px;white-space:nowrap}#clock small{font-size:10.5px}
+  .speeds{padding:2px}.speeds button{padding:3px 6px;min-width:26px;font-size:11px}
+  .tbtn{padding:5px 8px;font-size:12px;gap:5px}.tbtn svg{width:13px;height:13px}
+  #nations{width:205px;padding:5px}.nat{padding:5px 7px}.nat .nm{font-size:13px}.nat .ap{font-size:12px}.nat .sub{font-size:10.5px}
+  #miniwrap{left:225px;padding:4px}#mini{width:170px;height:85px}
+  #dossier{width:285px;padding:8px 10px;font-size:13px}.dname{font-size:18px}.flag{width:30px;height:20px}
+  .pres{margin:6px 0;padding:7px 8px}.pres q{display:none}.pres .pi{font-size:11px}
+  .grid{gap:4px;margin:6px 0}.stat{padding:5px 7px}.stat .k{font-size:10.5px}.stat .v{font-size:14px}
+  #feed{height:118px;width:min(470px,calc(100% - 320px));padding:4px 6px}#feedlist{font-size:11.5px}#feedlist li{grid-template-columns:62px 8px 1fr}
+  #nations h2,#dossier h2,#feed h2,.sect h2{font-size:10px;margin:2px 4px 4px}
+}
+@media (max-width:1200px){#miniwrap{display:none}#dossier{width:260px}}
+body.noui #nations,body.noui #dossier,body.noui #feed,body.noui #miniwrap,body.noui #inspect{display:none!important}
+#uiBtn{font-size:15px;line-height:1;padding:5px 9px}

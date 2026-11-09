@@ -1,0 +1,11 @@
+{
+  "name": "worldmind",
+  "version": "2.0.0",
+  "description": "Worldmind — yapay zekâ başkanların yönettiği on ülke simülasyonu",
+  "private": true,
+  "scripts": {
+    "start": "node server/server.js",
+    "build:single": "node tools/build-single.js"
+  },
+  "engines": { "node": ">=18" }
+}

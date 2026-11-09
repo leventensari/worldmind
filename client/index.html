@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Worldmind — yapay zekâ yönetimli ülkeler simülasyonu</title>
+<meta name="description" content="On ülkenin yapay zekâ başkanlar tarafından yönetildiği, yaşayan bir dünya simülasyonu.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌍</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="theme.css">
+</head>
+<body>
+<div id="loading"><div class="t">World<b>mind</b></div><div class="s" id="loadmsg">Kıtalar oluşturuluyor…</div><div class="pb"><i id="loadbar"></i></div></div>
+
+<canvas id="world" aria-label="Simülasyon haritası"></canvas>
+
+<header id="top">
+  <div class="brand"><span>World<b>mind</b></span><small>yapay zekâ ajanlarının yönettiği on ülke</small></div>
+  <div id="clock">—<small>—</small></div>
+  <div class="speeds" role="group" aria-label="Zaman hızı">
+    <button data-s="0" title="Duraklat (boşluk)">❚❚</button>
+    <button data-s="1" title="Gerçekçi: 1 sn = 1 oyun dakikası">1×</button>
+    <button data-s="2" title="1 sn = 4 dk">2×</button>
+    <button data-s="3" title="1 sn = 15 dk">3×</button>
+    <button data-s="4" title="1 sn = 1 saat">4×</button>
+    <button data-s="5" title="1 sn = 3 saat">5×</button>
+  </div>
+  <div class="spacer"></div>
+  <button class="tbtn primary" id="summitBtn" title="Her başkan kendi verisiyle ayrı bir Claude ajanı olarak karar verir">AI zirvesini topla</button>
+  <div class="menuwrap"><button class="tbtn" data-menu="evMenu">Olay tetikle</button>
+    <div class="menu" id="evMenu">
+      <div class="note">Seçili ülkede tetiklenir</div>
+      <button data-ev="quake">Deprem</button>
+      <button data-ev="epidemic">Salgın hastalık</button>
+      <button data-ev="fire">Bina yangını</button>
+      <button data-ev="wildfire">Orman yangını</button>
+      <button data-ev="flood">Sel</button>
+      <button data-ev="storm">Fırtına</button>
+      <button data-ev="crisis">Ekonomik kriz</button>
+      <button data-ev="war">Savaş başlat (en yakın ülke)</button>
+      <button data-ev="border">Sınır olayı (komşuyla)</button>
+      <button data-ev="crimewave">Suç dalgası</button>
+    </div></div>
+  <div class="menuwrap"><button class="tbtn" data-menu="layMenu">Katmanlar</button>
+    <div class="menu" id="layMenu">
+      <label><input type="checkbox" id="lyPol"> Siyasi harita</label>
+      <label><input type="checkbox" id="lyNight" checked> Gece ve gündüz</label>
+      <label><input type="checkbox" id="lyLabels" checked> Şehir adları</label>
+      <label><input type="checkbox" id="lyWeather" checked> Hava efektleri</label>
+      <label><input type="checkbox" id="lyNpc" checked> İnsanlar ve araçlar</label>
+      <label><input type="checkbox" id="lyClouds" checked> Bulut gölgeleri</label>
+    </div></div>
+  <button class="tbtn" id="setBtn">Ayarlar</button>
+  <button class="tbtn hidebtn" id="natToggle">Ülkeler</button><button class="tbtn hidebtn" id="dosToggle">Dosya</button>
+</header>
+
+<aside id="nations" aria-label="Ülkeler"><h2>Ülkeler ve onay oranı</h2><div id="natlist"></div></aside>
+<div id="miniwrap"><canvas id="mini" aria-label="Mini harita"></canvas></div>
+<aside id="dossier" aria-label="Ülke dosyası"></aside>
+<section id="feed" aria-label="Haber akışı">
+  <div class="feedtabs"><button data-f="all" class="on">Tümü</button><button data-f="ai">Başkan kararları</button><button data-f="hi">Kriz ve olaylar</button><button data-f="sel">Seçili ülke</button></div>
+  <ul id="feedlist"></ul>
+</section>
+<div id="inspect"><button class="x" aria-label="Kapat">×</button><div id="inspBody"></div></div>
+<div id="modal"><div class="box" id="modalBox"></div></div>
+<div id="toast"></div>
+<script src="js/00-core.js"></script>
+<script src="js/10-world.js"></script>
+<script src="js/20-sim.js"></script>
+<script src="js/30-movement.js"></script>
+<script src="js/40-agents-ai.js"></script>
+<script src="js/50-art.js"></script>
+<script src="js/55-sprites.js"></script>
+<script src="js/57-fx.js"></script>
+<script src="js/60-render.js"></script>
+<script src="js/70-ui.js"></script>
+<script src="js/45-story.js"></script>
+<script src="js/58-audio.js"></script>
+<script src="js/80-main.js"></script>
+</body>
+</html>

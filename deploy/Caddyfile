@@ -1,0 +1,5 @@
+# Alan adını buraya yaz; Caddy HTTPS sertifikasını otomatik alır.
+senin-alan-adin.com, www.senin-alan-adin.com {
+	encode zstd gzip
+	reverse_proxy 127.0.0.1:8080
+}
