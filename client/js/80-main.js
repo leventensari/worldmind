@@ -48,7 +48,7 @@ function boot(){
     chunkCache.clear();chunkBytes=0;spriteCache.clear();spriteBytes=0;pathCache.clear();shipPaths.clear();feed.length=0;wars=[];incidents=[];burning=[];planes=[];ships=[];particles=[];tripQ.length=0;floodList=[];
     now=360;lastHour=6;lastDay=0;
     const prog=(p,m)=>{bar.style.width=(p*100)+'%';msg.textContent=m};
-    worldReady=false;bDist=null;genWorld(prog);const SV=readSave();window.__resumed=!!SV;if(SV)applySave(SV);populate();worldReady=true;initRelations();computeIntersections();initAmbient();initClouds();markAllDirty();
+    worldReady=false;bDist=null;genWorld(prog);const SV=readSave();window.__resumed=!!SV;if(SV){try{applySave(SV)}catch(e){console.warn('kayıt yüklenemedi',e);try{localStorage.removeItem(SAVE_KEY)}catch(_){}location.reload();return}}populate();worldReady=true;initRelations();computeIntersections();initAmbient();initClouds();markAllDirty();
     if(window.__resumed)news(-1,'Kayıt yüklendi; dünya kaldığı yerden devam ediyor.','ai');else for(const nt of nations)remember(nt,`Göreve başladım. Ülkem ${nt.name}, ideolojim ${nt.pres.ideo}.`);
     news(-1,`${fmtDate(now,false)}: Worldmind başladı. On ülke, on yapay zekâ başkan, ${agents.length} vatandaş ajanı ve ${ambient.length} sürücü ile yaya sahnede.`,'ai');
     scheduleFlights();scheduleShips();ensureFishing();for(const s of ships)if(s.depart)s.depart=now+rnd(0,300);

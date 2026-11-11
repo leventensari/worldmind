@@ -59,13 +59,16 @@ function b64(a){const u=new Uint8Array(a.buffer,a.byteOffset,a.byteLength);let s
 function unb64(s,T){const bin=atob(s),u=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)u[i]=bin.charCodeAt(i);return new T(u.buffer)}
 function saveGame(manual){if(!worldReady)return;try{const arr={};for(const n of['terr','owner','treeKind','decor','bldAt','cityAt']){try{const a=eval(n);if(a&&a.buffer)arr[n]=[a.constructor.name,b64(a)]}catch(e){}}
   const S={v:1,t:Date.now(),now,lastHour,lastDay,arr,buildings,cities,nations,wars,feed:feed.slice(0,150),papers,negs};
-  localStorage.setItem(SAVE_KEY,JSON.stringify(S,(k,v)=>SKIPK.has(k)?undefined:v instanceof Map?{__map:[...v]}:v));if(manual)toast('Oyun kaydedildi.')}
+  localStorage.setItem(SAVE_KEY,JSON.stringify(S,(k,v)=>SKIPK.has(k)?undefined:v instanceof Map?{__map:[...v]}:v instanceof Set?{__set:[...v]}:v));if(manual)toast('Oyun kaydedildi.')}
   catch(e){console.warn('kayıt',e);if(manual)toast('Kayıt başarısız: '+e.message,true)}}
-function readSave(){try{const s=localStorage.getItem(SAVE_KEY);return s?JSON.parse(s,(k,v)=>v&&v.__map?new Map(v.__map):v):null}catch(e){return null}}
+function readSave(){try{const s=localStorage.getItem(SAVE_KEY);return s?JSON.parse(s,(k,v)=>v&&v.__map?new Map(v.__map):v&&v.__set?new Set(v.__set):v):null}catch(e){return null}}
 function applySave(S){for(const n in S.arr){const[ct,d]=S.arr[n];try{const a=eval(n);a.set(unb64(d,window[ct]||Uint8Array).subarray(0,a.length))}catch(e){}}
-  buildings.length=0;buildings.push(...S.buildings);cities.length=0;cities.push(...S.cities);S.nations.forEach((o,i)=>{if(nations[i])Object.assign(nations[i],o)});
+  buildings.length=0;buildings.push(...S.buildings);cities.length=0;cities.push(...S.cities);S.nations.forEach((o,i)=>{const n=nations[i];if(!n)return;for(const k in o){if(n[k] instanceof Set&&!(o[k] instanceof Set))o[k]=new Set(Array.isArray(o[k])?o[k]:[]);else if(n[k] instanceof Map&&!(o[k] instanceof Map))o[k]=new Map()}Object.assign(n,o)});
   wars.length=0;wars.push(...S.wars);feed.length=0;feed.push(...S.feed);if(S.papers)papers.push(...S.papers);if(S.negs)negs.push(...S.negs);
   now=S.now;lastHour=S.lastHour;lastDay=S.lastDay;for(const f of['computeRoadComp','computeEntrances'])if(typeof window[f]==='function')window[f]();bDist=null}
 setInterval(()=>saveGame(),120000);addEventListener('beforeunload',()=>saveGame());
 document.addEventListener('click',e=>{if(e.target&&e.target.id==='sNew')try{localStorage.removeItem(SAVE_KEY)}catch(_){}},true);
 (function(){const ref=$('#summitBtn');if(ref&&!$('#saveBtn'))ref.insertAdjacentHTML('beforebegin','<button class="tbtn" id="saveBtn" title="Oyunu kaydet (otomatik kayıt da açık)">💾</button>');const b=$('#saveBtn');if(b)b.onclick=()=>saveGame(true)})();
+
+// kayıt güvenlik ağı: kayıtla açılış hata verirse kaydı sil ve yeni dünyayla aç
+addEventListener('error',()=>{if(window.__resumed&&(typeof worldReady==='undefined'||!worldReady)){try{localStorage.removeItem(SAVE_KEY)}catch(_){}location.reload()}});
